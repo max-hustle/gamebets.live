@@ -1,1 +1,1 @@
-# gamersbet.live
+# gamebets.live
