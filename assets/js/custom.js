@@ -73,34 +73,28 @@
 
 
 	(function init() {
-	  function getTimeRemaining(endtime) {
-	    var t = Date.parse(endtime) - Date.parse(new Date());
-	    var seconds = Math.floor((t / 1000) % 60);
-	    var minutes = Math.floor((t / 1000 / 60) % 60);
-	    var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-	    var days = Math.floor(t / (1000 * 60 * 60 * 24));
-	    return {
-	      'total': t,
-	      'days': days,
-	      'hours': hours,
-	      'minutes': minutes,
-	      'seconds': seconds
-	    };
-	  }
-	  
-	  function initializeClock(endtime){
-	  var timeinterval = setInterval(function(){
-	    var t = getTimeRemaining(endtime);
-	    document.querySelector(".days > .value").innerText=t.days;
-	    document.querySelector(".hours > .value").innerText=t.hours;
-	    document.querySelector(".minutes > .value").innerText=t.minutes;
-	    document.querySelector(".seconds > .value").innerText=t.seconds;
-	    if(t.total<=0){
-	      clearInterval(timeinterval);
-	    }
-	  },1000);
-	}
-	initializeClock(((new Date()).getFullYear()+1) + "/1/1")
+		var countDownDate = new Date("Jan 29, 2021 18:00:00").getTime();
+
+		var x = setInterval(function () {
+
+			var now = new Date().getTime();
+
+			var distance = countDownDate - now;
+
+			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+			document.querySelector(".days > .value").innerText = days
+			document.querySelector(".hours > .value").innerText = hours;
+			document.querySelector(".minutes > .value").innerText = minutes;
+			document.querySelector(".seconds > .value").innerText = seconds;
+
+			if (distance < 0) {
+				clearInterval(x);
+			}
+		}, 1000);
 	})()
 
 })(jQuery);
